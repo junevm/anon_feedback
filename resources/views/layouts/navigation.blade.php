@@ -31,7 +31,7 @@
 
             <!-- Right Side -->
             <div class="hidden sm:flex sm:items-center">
-                <x-dropdown align="right" width="56">
+                <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none transition">
                             <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-medium mr-2">
