@@ -39,6 +39,10 @@ COPY docker/nginx.conf /etc/nginx/sites-available/default
 # Copy supervisor configuration
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Copy entrypoint script
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
@@ -52,6 +56,8 @@ RUN npm install && npm run build
 
 # Expose port 80
 EXPOSE 80
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # Start supervisor
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
