@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserSeeder extends Seeder
 {
@@ -12,30 +13,13 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create admin user
-        \App\Models\User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@anonfeedback.com',
-            'password' => bcrypt('password'),
-            'role' => 'admin',
-            'email_verified_at' => now(),
-        ]);
-
-        // Create sample employees
-        \App\Models\User::create([
-            'name' => 'John Doe',
-            'email' => 'john@anonfeedback.com',
-            'password' => bcrypt('password'),
-            'role' => 'employee',
-            'email_verified_at' => now(),
-        ]);
-
-        \App\Models\User::create([
-            'name' => 'Jane Smith',
-            'email' => 'jane@anonfeedback.com',
-            'password' => bcrypt('password'),
-            'role' => 'employee',
-            'email_verified_at' => now(),
-        ]);
+        // Check if admin exists
+        if (!User::where('email', 'admin@example.com')->exists()) {
+            User::create([
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => Hash::make('password'),
+            ]);
+        }
     }
 }
