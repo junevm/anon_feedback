@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function index()
     {
         // Simple pagination
-        $feedbacks = Feedback::latest()->paginate(10);
+        $feedbacks = Feedback::latest()->paginate(20);
         return view('admin.index', compact('feedbacks'));
     }
 

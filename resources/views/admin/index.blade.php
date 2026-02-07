@@ -20,14 +20,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($feedbacks as $feedback)
+                    @forelse($feedbacks as $feedback)
                     <tr class="{{ $feedback->is_toxic ? 'table-warning' : '' }}">
                         <td>{{ $feedback->id }}</td>
                         <td>
                             <span class="badge bg-secondary">{{ $feedback->category }}</span>
                         </td>
                         <td>
-                            <p class="mb-0">{{ Str::limit($feedback->message, 100) }}</p>
+                            <p class="mb-0">{{ \Illuminate\Support\Str::limit($feedback->message, 100) }}</p>
                             @if(strlen($feedback->message) > 100)
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#msgModal{{ $feedback->id }}">Read more</a>
                                 
@@ -72,7 +72,13 @@
                             </form>
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            No feedback submitted yet.
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

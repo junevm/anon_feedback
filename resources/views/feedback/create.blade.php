@@ -8,6 +8,16 @@
                 <h4 class="mb-0">Submit Anonymous Feedback</h4>
             </div>
             <div class="card-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="alert alert-info">
                     Your identity is protected. We do not store user IDs or IP addresses.
                 </div>

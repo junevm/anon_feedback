@@ -23,7 +23,10 @@ WORKDIR /var/www
 # Copy existing application directory contents
 COPY . /var/www
 
-# We set user later, but for now root is fine for build
+# Copy entrypoint script
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
-CMD ["php-fpm"]
+ENTRYPOINT ["entrypoint.sh"]
